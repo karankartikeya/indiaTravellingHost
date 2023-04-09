@@ -16,7 +16,7 @@ function About({ }: Props) {
                 <p className='h3 mt-4'>Blog Description </p>
 
                 <iframe
-                    src='https://www.youtube.com/embed/1Q8fG0TtVAY'
+                    src='https://www.youtube.com/embed/d9AUCOtOaTM'
                     title='YouTube video player'
                     allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
                     allowFullScreen

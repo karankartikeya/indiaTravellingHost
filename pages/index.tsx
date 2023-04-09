@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   return (
-    <div className='bg-gradient-to-r from-[#cab59e] to-[#dcad51] scrollbar scrollbar-track-slate-500'>
+    <div className='bg-gradient-to-r from-[#cab59e] to-[#dcad51] scrollbar scrollbar-track-blue-500 scrollbar-thumb-yellow-400'>
       <section className="relative h-screen flex flex-col items-center justify-center text-center text-white py-0 px-3">
         <Banner />
       </section>
@@ -29,6 +29,12 @@ export default function Home() {
         <Sectionas num={2} />
         <Sectionas num={3} />
       </section>
+
+      <section id='blogs' className=''>
+        <MediumCard title='Trending Deals'/>
+      </section>
+
+      <Testimonials/>
 
 {/* 
 
