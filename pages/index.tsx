@@ -30,13 +30,13 @@ export default function Home() {
         <Sectionas num={3} />
       </section>
 
+{/* 
 
-      {/** Travel Itinerary Section Card */}
       <section id='itinerary' className='mb-10'>
         <MediumCard title='Itinerary'/>
       </section>
 
-      <Testimonials/>
+      <Testimonials/> */}
 
       <Footer/>
 
