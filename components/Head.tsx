@@ -4,49 +4,138 @@ import React, { useState } from 'react'
 import router, { useRouter } from 'next/router';
 
 import Link from 'next/link';
+import Menu from './Menu';
 
 type Props = {
   placeholder: string;
 }
 
 function Head({ placeholder }: Props) {
-  const myLoader = () => {
-    return '/logo.jpeg'
+  const [menu, setMenu] = useState(false);
+  const router = useRouter();
+  const session = true;
+
+
+  const header_content = {
+    logo: {
+      title: "7svar",
+      path: "/logo.jpeg",
+    },
+    menu: [
+      {
+        title: "",
+        link: "/",
+      },
+      {
+        title: "Why Us?",
+        link: "/#whyUs",
+      },
+      {
+        title: "How It Works",
+        link: "/#howItWorks",
+      },
+      {
+        title: "Courses",
+        link: "/#courses",
+      },
+    ],
   };
 
-  const [searchInput, setSearchInput] = useState('');
-
-  const openModal = () => setSearchInput('Rajae HomeStay');
-
   return (
-    <header id='home' className='sticky top-0 z-50 grid grid-cols-3 bg-transparent shadow-md p-5 md:px-10'>
-
-      {/**Left Side: Icon */}
-      <div onClick={() => router.push('/')} className='relative flex items-center h-16 cursor-pointer my-auto'>
+    <header className=" relative z-30 -top-10 lg:top-0 w-full py-6 h-[130px] shadow-red-500 z-20">
+      <nav className="mx-auto flex w-full flex-row items-center justify-center mt-0 space-x-4">
+        {/* Logo */}
         <Image
+          src={header_content?.logo?.path}
+          className="cursor-pointer p-4"
+          onClick={() => router.push("/")}
+          height={150}
+          width={156}
           priority
-          alt="picture of homestay"
-          loader={myLoader}
-          src=" "
-          layout="fill"
-          objectFit='contain'
-          objectPosition='left'
+          alt={header_content?.logo?.title}
         />
-      </div>
+        <div className='md:flex flex-col w-[700px] items-center md:border-2 rounded-full py-2 shadow-md md:shadow-md'>
+          <p className='md:text-xl text-xs font-semibold p-4 text-red-600'>Contact Details:</p>
+        </div>
+        {/* Nav menu items */}
+        <ul className=" hidden md:space-x-6 lg:flex">
+          {header_content?.menu &&
+            header_content?.menu.map((item, i) => (
+              <li
+                className="cursor-pointer transition p-2 rounded-lg text-blue-600 hover:text-yellow-400 font-bold text-4xl md:text-2xl"
+                key={i} onClick={() => router.push(`${item?.link}`)}>
+                {item?.title}
+              </li>
+            ))}
+        </ul>
 
-      {/**  Middle Section: Search Bar */}
-      <div className='md:flex flex-col items-center md:border-2 rounded-full py-2 space-x-0 shadow-md md:shadow-md'>
-      </div>
+        <div>
+          {/* Buttons */}
+          <div className="hidden flex-row space-x-1 md:space-x-4 lg:flex ml-4 p-4">
+            {session ? (
+              <>
+                <button className=" rounded-lg border-2 bg-yellow-400 border-dark-gray text-xl font-bold px-8 py-4 transition hover:text-dark-blue hover:bg-blue-200" onClick={() => router.push('/profile/dashboard')}>
+                  My Learning
+                </button>
+                <button className="rounded-lg border-2 bg-yellow-400 border-dark-blue text-xl font-bold px-8 py-4 transition hover:text-dark-blue hover:bg-blue-200 " >
+                  Sign Out
+                </button>
+              </>
+            ) : (
+              <>
+                <Link href='/signin'>
+                  <button className="disabled font-extrabold rounded-lg bg-yellow-400 border-2 border-dark-gray text-xl text-gray-800 px-8 py-4 transition hover:text-dark-blue  hover:bg-blue-200">
+                    Login
+                  </button>
+                </Link>
+                <Link href='/register'>
+                  <button className="rounded-lg font-extrabold border-2 bg-yellow-400 border-dark-blue text-xl px-8 py-4 transition hover:text-dark-blue  hover:bg-blue-200">
+                    Sign Up
+                  </button>
+                </Link>
+              </>
+            )}
 
-      {/**  Right Section: Right Side */}
-      <div className='flex items-center space-x-4 justify-end text-gray-500' onClick={openModal}>
-        <Link href='/login'>
-          <p className='hidden lg:inline bg-red-500 text-white font-bold border-2 rounded-full p-2 cursor-pointer'> Login/Register</p>
-        </Link>
-      </div>
+          </div>
+
+          {/* Menu Icon */}
+          <div className="lg:hidden p-4" onClick={() => setMenu(!menu)}>
+            {menu ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="h-6 w-6"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="h-6 w-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                />
+              </svg>
+            )}
+          </div>
+        </div>
+      </nav>
+      <Menu menu={menu} session={true} />
 
     </header>
-  )
+  );
 }
 
 export default Head
