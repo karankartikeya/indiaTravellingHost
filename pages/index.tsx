@@ -33,8 +33,10 @@ export default function Home() {
       <section id='blogs' className=''>
         <MediumCard title='Trending Deals'/>
       </section>
-
+      
       <Testimonials/>
+
+      <div className='mb-10'></div>
 
 {/* 
 

@@ -55,7 +55,7 @@ function Head({ placeholder }: Props) {
           alt={header_content?.logo?.title}
         />
         <div className='md:flex flex-col w-[700px] items-center md:border-2 rounded-full py-2 shadow-md md:shadow-md'>
-          <p className='md:text-xl text-xs font-semibold p-4 text-red-600'>Contact Details:</p>
+          <input type='text' placeholder={placeholder} className='w-full md:w-[600px] bg-transparent py-2 px-4 rounded-full outline-none border-none' />
         </div>
         {/* Nav menu items */}
         <ul className=" hidden md:space-x-6 lg:flex">

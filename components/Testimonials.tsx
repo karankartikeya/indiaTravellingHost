@@ -5,7 +5,7 @@ const Testimonials = ({  }) => {
   const Component = 'div';
   return (
     <Component >
-      <div className='flex flex-col relative overflow-hidden mt-10 text-left md:flex-row max-w-full px-10 md:justify-evenly space-y-44 mx-auto items-center'>
+      <div className='hidden md:block flex flex-col relative overflow-hidden mt-10 text-left md:flex-row max-w-full px-10 md:justify-evenly space-y-44 mx-auto items-center'>
       <h1 className='absolute top-24 uppercase text-4xl font-bold text-dark-blue lg:text-6xl mb-24'>
           Testimonials
         </h1>
