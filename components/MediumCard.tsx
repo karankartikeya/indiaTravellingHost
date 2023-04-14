@@ -3,23 +3,26 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import DetailCard from './DetailCard';
 import Link from 'next/link';
-import {motion} from 'framer-motion';
+import { motion } from 'framer-motion';
+import { Itinerary, Post } from '@/typing';
 
 
 type Props = {
-    title: string;
+  title: string;
+  posts?: Post[];
+  itineraries?: Itinerary[];
 }
 
 
-function MediumCard({title }: Props) {
-    const router = useRouter();
-    const goToRoom = () => {
-        router.push(`#`);
-    }
-    return (
-        
-       <>
-        <motion.div
+function MediumCard({ title, posts, itineraries }: Props) {
+  const router = useRouter();
+  const goToRoom = () => {
+    router.push(`#`);
+  }
+  return (
+
+    <>
+      <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 1.5 }}
@@ -29,18 +32,21 @@ function MediumCard({title }: Props) {
         </h1>
         <p className='text-xl font-semibold md:hidden'>Slide to view Blogs</p>
         <div className='w-full flex space-x-5 mt-0 overflow-x-scroll p-10 snap-x snap-mandatory scrollbar scrollbar-track-blue-500/40 scrollbar-thumb-yellow-400'>
-          <DetailCard/>
-          <DetailCard/>
-          <DetailCard/>
-
+          {title == 'Blogs' ?
+            (posts?.map((post) => (
+              <DetailCard key={post._id} post={post} title='post'/>
+            ))) :
+            (itineraries?.map((itinerary) => (
+              <DetailCard key={itinerary._id} itinerary={itinerary} title='itinerary'/>
+            )))}
         </div>
-      </motion.div> 
+      </motion.div>
       <p className='float-right p-4 text-blue-500 font-bold'>
         <Link href='/blogDescription/101'>Read more</Link>
-         </p>
-       </>
+      </p>
+    </>
 
-    )
+  )
 }
 
 export default MediumCard
