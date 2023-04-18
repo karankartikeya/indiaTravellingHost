@@ -1,6 +1,9 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router';
 import React, { useState } from 'react'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
 type Props = {}
 
@@ -12,12 +15,26 @@ function SignIn({ }: Props) {
         password: '',
     });
     const { name, email, phoneNumber, password } = formData;
+    const supabaseClient = useSupabaseClient();
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
         setFormData({ ...formData, [e.target.name]: e.target.value });
 
     const router = useRouter();
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        const { data, error } = await supabaseClient.auth.signInWithPassword(
+            {
+                email: formData.email,
+                password: formData.password,
+            }
+        );
+        if (!error) {
+            toast.success('You are logged in');
+            router.push('/profile/dashboard');
+        }
+        else {
+            toast.error('Invalid credentials');
+        }
         console.log(formData);
     };
 
@@ -26,7 +43,18 @@ function SignIn({ }: Props) {
 
 
             <div className='bg-gradient-to-r from-[#cab59e] to-[#dcad51] flex flex-col justify-center'>
-
+                <ToastContainer
+                    position="bottom-center"
+                    autoClose={2000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"
+                />
                 <form className='max-w-[400px] w-full mx-auto rounded-lg space-y-4  p-8 px-8' onSubmit={onSubmit}>
                     <h2 className='text-5xl uppercase dark:text-white font-extrabold text-center mb-10'>Login	</h2>
 

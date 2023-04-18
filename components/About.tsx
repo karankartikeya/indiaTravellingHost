@@ -1,19 +1,22 @@
 import React from 'react'
 
-type Props = {}
+type Props = {
+    Title?: string;
+    Author?: string;
+}
 
-function About({ }: Props) {
+function About({ Title, Author }: Props) {
     return (
 
         <section id='about'>
             <div className='layout flex flex-col items-center justify-center pt-24 pb-20 text-center'>
                 <h1 className='text-center font-sans text-4xl font-black leading-relaxed text-content md:text-5xl lg:text-8xl'>
                     <span className='highlight highlight--light'>
-                        Blog Title
+                        {Title}
                     </span>{' '}
-                    Blog Subtitle
+                    
                 </h1>
-                <p className='h3 mt-4'>Blog Description </p>
+                <p className='h3 mt-4'>Written By: {Author} </p>
 
                 <iframe
                     src='https://www.youtube.com/embed/d9AUCOtOaTM'

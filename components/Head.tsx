@@ -2,24 +2,33 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 
 import router, { useRouter } from 'next/router';
+import{ motion }from 'framer-motion'
 
 import Link from 'next/link';
 import Menu from './Menu';
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
 type Props = {
-  placeholder: string;
+  placeholder?: string;
+  session: boolean;
 }
 
-function Head({ placeholder }: Props) {
+function Header({ placeholder, session }: Props) {
   const [menu, setMenu] = useState(false);
   const router = useRouter();
-  const session = true;
   const [search, setSearch] = useState('');
   const openModal = () => {
     setSearch('true');
   }
+  const supabaseClient = useSupabaseClient();
   const closeModal = () => {
     setSearch('');
+  }
+  const signOut = async () => {
+    const { error } = await supabaseClient.auth.signOut();
+    if (!error) {
+      location.reload();
+    }
   }
 
   const header_content = {
@@ -90,7 +99,7 @@ function Head({ placeholder }: Props) {
                   <button className=" rounded-lg border-2 bg-yellow-400 border-dark-gray text-xl font-bold px-8 py-4 transition hover:text-dark-blue hover:bg-blue-200" onClick={() => router.push('/profile/dashboard')}>
                     My Learning
                   </button>
-                  <button className="rounded-lg border-2 bg-yellow-400 border-dark-blue text-xl font-bold px-8 py-4 transition hover:text-dark-blue hover:bg-blue-200 " >
+                  <button className="rounded-lg border-2 bg-yellow-400 border-dark-blue text-xl font-bold px-8 py-4 transition hover:text-dark-blue hover:bg-blue-200 " onClick={signOut}>
                     Sign Out
                   </button>
                 </>
@@ -147,12 +156,15 @@ function Head({ placeholder }: Props) {
 
 
         </nav>
-        <Menu menu={menu} session={true} />
+        <Menu menu={menu} session={session} />
 
       </header>
       {/** Results Display upto 3 */}
       {search && (
-        <div className=' flex flex-col md:mt-20 col-span-3 mt-5 border-2'>
+        <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 1.5 }} className=' flex flex-col md:mt-20 col-span-3 mt-5 border-2'>
 
         <div className='flex mx-auto items-center border-b mb-4'>
           <h2 className='text-2xl flex-grow font-semibold'> Search Results</h2>
@@ -163,10 +175,10 @@ function Head({ placeholder }: Props) {
             <button className='flex-grow text-blue-600'>Show More Results</button>
           </div>
         </div>
-      </div>
+      </motion.div>
       )}
     </>
   );
 }
 
-export default Head
+export default Header

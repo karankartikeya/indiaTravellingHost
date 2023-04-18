@@ -1,11 +1,12 @@
 import Footer from '@/components/Footer'
-import Head from '@/components/Head'
 import { GetServerSideProps } from 'next'
-import React from 'react'
+import React, { useState } from 'react'
 import { Itinerary, Post } from '@/typing'
 import { useRouter } from 'next/router'
 import InfoCard from '@/components/InfoCard'
 import { fetchItinerary } from '@/utils/fetchItineraries'
+import { useSupabaseClient } from '@supabase/auth-helpers-react'
+import Header from '@/components/Head'
 
 type Props = {
     itineraries: Itinerary[];
@@ -14,10 +15,27 @@ type Props = {
 function AllItinerary({ itineraries }: Props) {
 
     const { query } = useRouter();
+    const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+    const supabaseClient = useSupabaseClient();
+
+    {/** provide session:Session to header component */ }
+    const user_session = async () => {
+        const { data, error } = await supabaseClient.auth.getSession();
+        return data.session;
+    }
+
+    const isSession2 = user_session().then((val) => {
+        if (val != null) {
+            setIsUserLoggedIn(true);
+        }
+    }).catch((err) => {
+        console.log("err=", err);
+    });
+    
     return (
         <div className='bg-gradient-to-r from-[#cab59e] to-[#dcad51] scrollbar scrollbar-track-blue-500 scrollbar-thumb-yellow-400 h-screen'>
 
-      <Head  placeholder='Search here'/>
+      <Header  placeholder='Search here' session={isUserLoggedIn}/>
       <main className='flex mb-10 mt-24'>
         <section className='flex-grow pt-14 px-6'>
             <p className='text-xs'>Travel with us </p>

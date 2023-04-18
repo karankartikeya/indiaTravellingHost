@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
 type Props = {
 
 }
 
 function Registration({ }: Props) {
-
 
 	const [formData, setFormData] = useState({
 		name: '',
@@ -22,8 +24,28 @@ function Registration({ }: Props) {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 
 	const router = useRouter();
+	const supabaseClient = useSupabaseClient();
 	const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+		const { data, error } = await supabaseClient.auth.signUp(
+			{
+				email: formData.email.toLowerCase(),
+				password: formData.password,
+				options: {
+					data: {
+						full_name: formData.name,
+						phone_number: formData.phoneNumber,
+					}
+				}
+			}
+		);
+		if (error) {
+			toast.error(error.message);
+		}
+		else {
+			toast.success('Check your email for verification link');
+			router.push('/login');
+		}
 		console.log(formData);
 	}
 
@@ -31,6 +53,18 @@ function Registration({ }: Props) {
 		<div className='grid grid-cols-1 md:grid-cols-1 bg-gradient-to-r from-[#cab59e] to-[#dcad51] h-screen w-full'>
 
 			<div className='bg-gradient-to-r from-[#cab59e] to-[#dcad51] flex flex-col justify-center'>
+				<ToastContainer
+					position="bottom-center"
+					autoClose={2000}
+					hideProgressBar={false}
+					newestOnTop={false}
+					closeOnClick
+					rtl={false}
+					pauseOnFocusLoss
+					draggable
+					pauseOnHover
+					theme="light"
+				/>
 				<form className='max-w-[400px] w-full mx-auto space-y-2 rounded-lg  p-8 px-8' onSubmit={onSubmit}>
 					<h2 className='text-5xl uppercase dark:text-white font-extrabold mb-10 text-center'>Register	</h2>
 					<div className='flex flex-col text-black py-2'>
