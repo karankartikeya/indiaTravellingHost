@@ -6,21 +6,29 @@ import{ motion }from 'framer-motion'
 
 import Link from 'next/link';
 import Menu from './Menu';
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
 type Props = {
   placeholder?: string;
+  session: boolean;
 }
 
-function Header({ placeholder }: Props) {
+function Header({ placeholder, session }: Props) {
   const [menu, setMenu] = useState(false);
   const router = useRouter();
-  const session = true;
   const [search, setSearch] = useState('');
   const openModal = () => {
     setSearch('true');
   }
+  const supabaseClient = useSupabaseClient();
   const closeModal = () => {
     setSearch('');
+  }
+  const signOut = async () => {
+    const { error } = await supabaseClient.auth.signOut();
+    if (!error) {
+      location.reload();
+    }
   }
 
   const header_content = {
@@ -91,7 +99,7 @@ function Header({ placeholder }: Props) {
                   <button className=" rounded-lg border-2 bg-yellow-400 border-dark-gray text-xl font-bold px-8 py-4 transition hover:text-dark-blue hover:bg-blue-200" onClick={() => router.push('/profile/dashboard')}>
                     My Learning
                   </button>
-                  <button className="rounded-lg border-2 bg-yellow-400 border-dark-blue text-xl font-bold px-8 py-4 transition hover:text-dark-blue hover:bg-blue-200 " >
+                  <button className="rounded-lg border-2 bg-yellow-400 border-dark-blue text-xl font-bold px-8 py-4 transition hover:text-dark-blue hover:bg-blue-200 " onClick={signOut}>
                     Sign Out
                   </button>
                 </>
@@ -148,7 +156,7 @@ function Header({ placeholder }: Props) {
 
 
         </nav>
-        <Menu menu={menu} session={true} />
+        <Menu menu={menu} session={session} />
 
       </header>
       {/** Results Display upto 3 */}

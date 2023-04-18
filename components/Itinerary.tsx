@@ -2,7 +2,7 @@ import React from 'react'
 
 type Props = {}
 
-function Itinerary({ }: Props) {
+function Itinerare({ }: Props) {
     return (
         <section id='syllabus' className=' bg-gradient-to-r from-[#cab59e] to-[#dcad51]'>
             <div className='layout flex flex-col items-center justify-center pt-24 pb-20 text-center'>
@@ -24,7 +24,7 @@ function Itinerary({ }: Props) {
     )
 }
 
-export default Itinerary
+export default Itinerare
 
 
 const content = {

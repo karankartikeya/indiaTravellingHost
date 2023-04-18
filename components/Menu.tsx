@@ -1,6 +1,7 @@
 import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 type Props = {
   menu: Boolean;
@@ -9,6 +10,13 @@ type Props = {
 
 export default function Menu({ menu, session }: Props) {
 
+  const supabaseClient = useSupabaseClient();
+  const signOut = async () => {
+    const { error } = await supabaseClient.auth.signOut();
+    if (!error) {
+      location.reload();
+    }
+  }
 
   const menus = [
     {
@@ -60,7 +68,7 @@ export default function Menu({ menu, session }: Props) {
                 </li>
                 <li
                   className="active:text-blue-600 font-semibold text-xl text-gray-600 font-bold py-4 transition hover:text-blue-500 "
-                  
+                  onClick={signOut}
                 >
                   SignOut
                 </li>
