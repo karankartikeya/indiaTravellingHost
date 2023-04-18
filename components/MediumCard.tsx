@@ -16,11 +16,9 @@ type Props = {
 
 function MediumCard({ title, posts, itineraries }: Props) {
   const router = useRouter();
-  const goToRoom = () => {
-    router.push(`#`);
-  }
-  return (
+  const link = title == 'Blogs' ? '/blogDescription/allBlog' : '/itineraryDescription/allItinerary';
 
+  return (
     <>
       <motion.div
         initial={{ opacity: 0 }}
@@ -34,18 +32,17 @@ function MediumCard({ title, posts, itineraries }: Props) {
         <div className='w-full flex space-x-5 mt-0 overflow-x-scroll p-10 snap-x snap-mandatory scrollbar scrollbar-track-blue-500/40 scrollbar-thumb-yellow-400'>
           {title == 'Blogs' ?
             (posts?.map((post) => (
-              <DetailCard key={post._id} post={post} title='post'/>
+              <DetailCard key={post._id} post={post} title='post' />
             ))) :
             (itineraries?.map((itinerary) => (
-              <DetailCard key={itinerary._id} itinerary={itinerary} title='itinerary'/>
+              <DetailCard key={itinerary._id} itinerary={itinerary} title='itinerary' />
             )))}
         </div>
       </motion.div>
       <p className='float-right p-4 text-blue-500 font-bold'>
-        <Link href='/blogDescription/101'>Read more</Link>
+        <Link href={link}>Read more</Link>
       </p>
     </>
-
   )
 }
 
