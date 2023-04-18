@@ -8,12 +8,17 @@ import Testimonials from '@/components/Testimonials'
 import React from 'react'
 import { Post } from '@/typing'
 import { fetchBlog } from '@/utils/fetchBlogs'
+import { useRouter } from 'next/router'
 
 type Props = {
     posts: Post[];
 }
 
-function blogId({ posts }: Props) {
+function BlogId({ posts }: Props) {
+
+    const { query } = useRouter();
+    const blogId= query.blogId as string;
+    const blogData = posts.find((post) => post?.postId === blogId);
     return (
         <>
             <div className='bg-gradient-to-r from-[#cab59e] to-[#dcad51] scrollbar scrollbar-track-gray-500/40'>
@@ -34,7 +39,7 @@ function blogId({ posts }: Props) {
     )
 }
 
-export default blogId
+export default BlogId
 
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
     const posts: Post[] = await fetchBlog();
