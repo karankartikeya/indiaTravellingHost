@@ -11,7 +11,6 @@ type Props = {
 
 function Registration({ }: Props) {
 
-
 	const [formData, setFormData] = useState({
 		name: '',
 		email: '',
@@ -45,7 +44,7 @@ function Registration({ }: Props) {
 		}
 		else {
 			toast.success('Check your email for verification link');
-			router.push('/signin');
+			router.push('/login');
 		}
 		console.log(formData);
 	}

@@ -8,10 +8,10 @@ import Link from 'next/link';
 import Menu from './Menu';
 
 type Props = {
-  placeholder: string;
+  placeholder?: string;
 }
 
-function Head({ placeholder }: Props) {
+function Header({ placeholder }: Props) {
   const [menu, setMenu] = useState(false);
   const router = useRouter();
   const session = true;
@@ -173,4 +173,4 @@ function Head({ placeholder }: Props) {
   );
 }
 
-export default Head
+export default Header
