@@ -1,6 +1,8 @@
 import SignIn from '@/components/SignIn'
 import Head from 'next/head'
 import React from 'react'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import { createServerSupabaseClient} from '@supabase/auth-helpers-nextjs'
 
 type Props = {}
 
@@ -24,3 +26,26 @@ function login({}: Props) {
 }
 
 export default login
+
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  // Create authenticated Supabase Client
+  const supabase = createServerSupabaseClient(ctx);
+  // Check if we have a session
+  const {
+    data: { session }
+  } = await supabase.auth.getSession();
+
+  if (session)
+    return {
+      redirect: {
+        destination: '/profile/dashboard',
+        permanent: false
+      }
+    };
+
+  return {
+    props: {
+      initialSession: session,
+    }
+  };
+}
