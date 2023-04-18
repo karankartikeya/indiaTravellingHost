@@ -35,6 +35,21 @@ export interface Place extends sanityBody{
     itineraries: Itinerary[];
 }
 
+export interface UserDetails {
+    id: string;
+    full_name: string;
+    phone_number: string;
+    email: string;
+    role: string;
+}
+
+export interface Subscription {
+    id: BigInteger /* primary key */;
+    user_id: string;
+    status: string;
+    itineraryId: string /* foreign key to courses.id */;
+    subscription_createdtimestamp: text;
+}
 
 export interface Post extends sanityBody{
     _type: "post";

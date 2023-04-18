@@ -13,22 +13,22 @@ import { fetchItinerary } from '@/utils/fetchItineraries'
 
 const inter = Inter({ subsets: ['latin'] })
 
-type Props={
+type Props = {
   posts: Post[];
   itineraries: Itinerary[];
 }
 
-export default function Home({posts, itineraries}:Props) {
+export default function Home({ posts, itineraries }: Props) {
   return (
     <div className='bg-gradient-to-r from-[#cab59e] to-[#dcad51] scrollbar scrollbar-track-blue-500 scrollbar-thumb-yellow-400'>
       <section className="relative h-screen flex flex-col items-center justify-center text-center text-white py-0 px-3">
         <Banner />
       </section>
 
-      <Head  placeholder='Search here'/>
+      <Head placeholder='Search here' />
       {/** Blogs Section Card */}
       <section id='blogs' className=''>
-        <MediumCard title='Blogs' posts={posts}/>
+        <MediumCard title='Blogs' posts={posts} />
       </section>
 
       {/** Why us */}
@@ -42,9 +42,9 @@ export default function Home({posts, itineraries}:Props) {
         <MediumCard title='Itineraries' itineraries={itineraries} />
       </section>
 
-      <Testimonials/>
+      <Testimonials />
       <div className='mb-10'></div>
-      <Footer/>
+      <Footer />
     </div>
 
 

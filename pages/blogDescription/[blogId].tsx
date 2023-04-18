@@ -9,6 +9,8 @@ import React from 'react'
 import { Post } from '@/typing'
 import { fetchBlog } from '@/utils/fetchBlogs'
 import { useRouter } from 'next/router'
+import { PortableText } from '@portabletext/react'
+import { RichTextComponents } from '@/components/RichTextComponents'
 
 type Props = {
     posts: Post[];
@@ -18,7 +20,7 @@ function BlogId({ posts }: Props) {
 
     const { query } = useRouter();
     const blogId= query.blogId as string;
-    const blogData = posts.find((post) => post?.postId === blogId);
+    const blogData = posts.find((post) => post?.postId === blogId)!;
     return (
         <>
             <div className='bg-gradient-to-r from-[#cab59e] to-[#dcad51] scrollbar scrollbar-track-gray-500/40'>
@@ -26,14 +28,15 @@ function BlogId({ posts }: Props) {
                     <Banner />
                 </section>
                 <Head placeholder='Search' />
-                <div className='bg-gradient-to-r from-[#cab59e] to-[#dcad51] scroll-smooth h-screen'>
-                    <About />
-                    <Testimonials />
-
+                <div className='bg-gradient-to-r from-[#cab59e] to-[#dcad51] scroll-smooth'>
+                    <About Title={blogData?.title} Author={blogData?.author}/> 
                 </div>
-                <Itinerary />
-
+                <div className='p-10'>
+                <PortableText value={blogData?.body} components={RichTextComponents}/>
+                </div>
+                <Testimonials />
             </div>
+            
             <Footer />
         </>
     )

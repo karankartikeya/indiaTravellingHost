@@ -2,6 +2,7 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 
 import router, { useRouter } from 'next/router';
+import{ motion }from 'framer-motion'
 
 import Link from 'next/link';
 import Menu from './Menu';
@@ -152,7 +153,10 @@ function Head({ placeholder }: Props) {
       </header>
       {/** Results Display upto 3 */}
       {search && (
-        <div className=' flex flex-col md:mt-20 col-span-3 mt-5 border-2'>
+        <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 1.5 }} className=' flex flex-col md:mt-20 col-span-3 mt-5 border-2'>
 
         <div className='flex mx-auto items-center border-b mb-4'>
           <h2 className='text-2xl flex-grow font-semibold'> Search Results</h2>
@@ -163,7 +167,7 @@ function Head({ placeholder }: Props) {
             <button className='flex-grow text-blue-600'>Show More Results</button>
           </div>
         </div>
-      </div>
+      </motion.div>
       )}
     </>
   );
