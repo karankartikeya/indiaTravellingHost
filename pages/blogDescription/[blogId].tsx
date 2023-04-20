@@ -46,7 +46,7 @@ function BlogId({ posts }: Props) {
         <>
             <div className='bg-gradient-to-r from-[#cab59e] to-[#dcad51] scrollbar scrollbar-track-gray-500/40'>
                 <section className="relative h-screen flex flex-col items-center justify-center text-center text-white py-0 px-3">
-                    <Banner />
+                    <Banner title={blogData?.title}/>
                 </section>
                 <Header placeholder='Search' session={isUserLoggedIn}/>
                 <div className='bg-gradient-to-r from-[#cab59e] to-[#dcad51] scroll-smooth'>

@@ -35,7 +35,7 @@ function Dashboard({ initialSession }: Props) {
           content="An online music learning platform which solves 3I's. Enroll now and find the music within you.."
           key="desc"
         />
-        <link rel="icon" href="7svar1.png" />
+        <link rel="icon" href="ith.jpeg" />
       </Head>
       <Header session={isSession}/>
       
@@ -48,8 +48,7 @@ function Dashboard({ initialSession }: Props) {
               </div>
             ) : (<div className=''><p className='md:text-6xl text-xl text-center items-center text-orange-500 justify-end font-semibold'>Seems like you haven&apos;t bought any course yet {userDetails?.full_name}</p>
               <p className='text-gray-600 text-xl text-center mt-10'>Click <Link href='/#courses' className='underline text-red-500'>here</Link> to buy some for you</p></div>)}
-          </div>
-        
+          </div>    
     </div>
   )
 }

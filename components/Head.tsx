@@ -34,7 +34,7 @@ function Header({ placeholder, session }: Props) {
   const header_content = {
     logo: {
       title: "7svar",
-      path: "/logo.jpeg",
+      path: "/ith.jpeg",
     },
     menu: [
       {
