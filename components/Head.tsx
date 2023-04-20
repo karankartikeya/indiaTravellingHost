@@ -1,35 +1,23 @@
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import router, { useRouter } from 'next/router';
-import{ motion }from 'framer-motion'
+import { motion } from 'framer-motion'
 
 import Link from 'next/link';
 import Menu from './Menu';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
+import InfoCard from './InfoCard';
+import SearchResult from './SearchResult';
+import { Post } from '@/typing';
 
 type Props = {
   placeholder?: string;
   session: boolean;
+  post?: Post[];
 }
 
-function Header({ placeholder, session }: Props) {
-  const [menu, setMenu] = useState(false);
-  const router = useRouter();
-  const [search, setSearch] = useState('');
-  const openModal = () => {
-    setSearch('true');
-  }
-  const supabaseClient = useSupabaseClient();
-  const closeModal = () => {
-    setSearch('');
-  }
-  const signOut = async () => {
-    const { error } = await supabaseClient.auth.signOut();
-    if (!error) {
-      location.reload();
-    }
-  }
+function Header({ placeholder, session, post }: Props) {
 
   const header_content = {
     logo: {
@@ -55,6 +43,49 @@ function Header({ placeholder, session }: Props) {
       },
     ],
   };
+  console.log(post);
+
+  const [menu, setMenu] = useState(false);
+  const router = useRouter();
+  const [search, setSearch] = useState('');
+  const [filteredList, setFilteredList] = useState(post!);
+
+  const openModal = () => {
+
+    setSearch('true');
+  }
+  const supabaseClient = useSupabaseClient();
+  const closeModal = () => {
+    setSearch('');
+  }
+  const signOut = async () => {
+    const { error } = await supabaseClient.auth.signOut();
+    if (!error) {
+      location.reload();
+    }
+  }
+
+  const Search = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+    console.log("search=", search);
+  }
+
+  useEffect(() => {
+    console.log("Search=", search);
+    var indexes: Post[] = [];
+    var newDtata = [-1];
+    post?.map((item) => {
+      item.keywords?.map((keyword, i) => {
+        if (keyword.toLocaleLowerCase().includes(search.toLowerCase()) && search != '') {
+          console.log("keyword=", keyword);
+          indexes.push(item);
+        }
+      })
+    })
+    console.log("newDtata=", indexes);
+    setFilteredList(indexes);
+  }, [search]);
+
 
   return (
     <>
@@ -75,7 +106,7 @@ function Header({ placeholder, session }: Props) {
 
           {/** Search Bar */}
           <div className='md:flex flex-col w-[700px] items-center md:border-2 rounded-full py-2 shadow-md md:shadow-md'>
-            <input type='text' placeholder={placeholder} onFocus={openModal} className='w-full md:w-[600px] bg-transparent py-2 px-4 rounded-full outline-none border-none' />
+            <input type='text' placeholder={placeholder} onChange={Search} onFocus={openModal} className='w-full md:w-[600px] bg-transparent py-2 px-4 rounded-full outline-none border-none' />
           </div>
 
 
@@ -162,20 +193,23 @@ function Header({ placeholder, session }: Props) {
       {/** Results Display upto 3 */}
       {search && (
         <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 1.5 }} className=' flex flex-col md:mt-20 col-span-3 mt-5 border-2'>
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 1.5 }} className=' flex flex-col md:mt-20 col-span-3 mt-5 border-2 p-10'>
 
-        <div className='flex mx-auto items-center border-b mb-4'>
-          <h2 className='text-2xl flex-grow font-semibold'> Search Results</h2>
-        </div>
-        <div>
-          <div className='flex'>
-            <button onClick={closeModal} className='flex-grow text-red-500'>Cancel</button>
-            <button className='flex-grow text-blue-600'>Show More Results</button>
+          <div className='flex mx-auto items-center border-b mb-4'>
+            <h2 className='text-2xl flex-grow font-semibold'> Search Results</h2>
           </div>
-        </div>
-      </motion.div>
+          {filteredList?.map((item, i) => (
+            <SearchResult key={i} post={item} />
+          ))}
+          <div>
+            <div className='flex'>
+              <button onClick={closeModal} className='flex-grow text-red-500'>Cancel</button>
+              <button className='flex-grow text-blue-600' onClick={() => router.push('/blogDescription/allBlog')}>Show More Results</button>
+            </div>
+          </div>
+        </motion.div>
       )}
     </>
   );

@@ -39,5 +39,11 @@ export default defineType({
       type: 'array',
       of: [{type: 'reference', to: {type: 'itinerary'}}],
     }),
+    defineField({
+      name: 'keywords',
+      title: 'Keywords',
+      type: 'array',
+      of: [{type: 'string'}]
+    }),
   ],
 })

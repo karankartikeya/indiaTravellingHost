@@ -60,7 +60,7 @@ export default function Home({ posts, itineraries }: Props) {
           <Banner />
         </section>
 
-        <Header placeholder='Search here' session={isUserLoggedIn} />
+        <Header placeholder='Search here' session={isUserLoggedIn} post={posts} />
         {/** Blogs Section Card */}
         <section id='blogs' className=''>
           <MediumCard title='Blogs' posts={posts} />
