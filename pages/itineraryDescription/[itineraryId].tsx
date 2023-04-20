@@ -10,6 +10,7 @@ import React, { useState } from 'react'
 import Header from '@/components/Head'
 import { useRouter } from 'next/router'
 import { useSupabaseClient } from '@supabase/auth-helpers-react'
+import Head from 'next/head'
 
 type Props = {
     itineraries: Itinerary[];
@@ -17,7 +18,7 @@ type Props = {
 
 function ItineraryId({ itineraries }: Props) {
     const { query } = useRouter();
-    const itineraryId= query.itineraryId as string;
+    const itineraryId = query.itineraryId as string;
     const blogData = itineraries.find((itinerary) => itinerary?.itineraryId === itineraryId)!;
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
     const supabaseClient = useSupabaseClient();
@@ -37,20 +38,35 @@ function ItineraryId({ itineraries }: Props) {
     });
     return (
         <>
-        <div className='bg-gradient-to-r from-[#cab59e] to-[#dcad51] scrollbar scrollbar-track-gray-500/40'>
-            <section className="relative h-screen flex flex-col items-center justify-center text-center text-white py-0 px-3">
-                <Banner title={blogData?.title}/>
-            </section>
-            <Header placeholder='Search' session={isUserLoggedIn}/>
-            <div className='bg-gradient-to-r from-[#cab59e] to-[#dcad51] scroll-smooth h-screen'>
-                <About />
-                <Testimonials />
-                
+            <Head>
+                <title>
+                    {blogData?.title}: ITH
+                </title>
+                <meta
+                    name="description"
+                    content={'Explore ' + blogData?.title}
+                    key="desc"
+                />
+                {/** add og title description and image */}
+                <meta property="og:title" content={blogData?.title+': ITH'} key="ogtitle" />
+                <meta property="og:description" content={'Explore ' + blogData?.title} key="ogdesc" />
+                <meta property="og:image" content="" key="ogimage" />
+                <link rel="icon" href="ith.jpeg" />
+            </Head>
+            <div className='bg-gradient-to-r from-[#cab59e] to-[#dcad51] scrollbar scrollbar-track-gray-500/40'>
+                <section className="relative h-screen flex flex-col items-center justify-center text-center text-white py-0 px-3">
+                    <Banner title={blogData?.title} />
+                </section>
+                <Header placeholder='Search' session={isUserLoggedIn} />
+                <div className='bg-gradient-to-r from-[#cab59e] to-[#dcad51] scroll-smooth h-screen'>
+                    <About />
+                    <Testimonials />
+
+                </div>
+                <Itinerare plan={blogData?.body} />
+
             </div>
-            <Itinerare plan={blogData?.body}/>
-            
-        </div>
-        <Footer />
+            <Footer />
         </>
     )
 }

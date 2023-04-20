@@ -14,6 +14,7 @@ import { RichTextComponents } from '@/components/RichTextComponents'
 import { createServerSupabaseClient, Session } from '@supabase/auth-helpers-nextjs'
 import { GetServerSidePropsContext } from 'next'
 import { useSupabaseClient } from '@supabase/auth-helpers-react'
+import Head from 'next/head'
 
 type Props = {
     posts: Post[];
@@ -22,7 +23,7 @@ type Props = {
 function BlogId({ posts }: Props) {
 
     const { query } = useRouter();
-    const blogId= query.blogId as string;
+    const blogId = query.blogId as string;
     const blogData = posts.find((post) => post?.postId === blogId)!;
 
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
@@ -41,23 +42,38 @@ function BlogId({ posts }: Props) {
     }).catch((err) => {
         console.log("err=", err);
     });
-    
+
     return (
         <>
+            <Head>
+                <title>
+                    {blogData?.title}: ITH
+                </title>
+                <meta
+                    name="description"
+                    content={'Explore ' + blogData?.title}
+                    key="desc"
+                />
+                {/** add og title description and image */}
+                <meta property="og:title" content={blogData?.title + ': ITH'} key="ogtitle" />
+                <meta property="og:description" content={'Explore ' + blogData?.title} key="ogdesc" />
+                <meta property="og:image" content="" key="ogimage" />
+                <link rel="icon" href="ith.jpeg" />
+            </Head>
             <div className='bg-gradient-to-r from-[#cab59e] to-[#dcad51] scrollbar scrollbar-track-gray-500/40'>
                 <section className="relative h-screen flex flex-col items-center justify-center text-center text-white py-0 px-3">
-                    <Banner title={blogData?.title}/>
+                    <Banner title={blogData?.title} />
                 </section>
-                <Header placeholder='Search' session={isUserLoggedIn}/>
+                <Header placeholder='Search' session={isUserLoggedIn} />
                 <div className='bg-gradient-to-r from-[#cab59e] to-[#dcad51] scroll-smooth'>
-                    <About Title={blogData?.title} Author={blogData?.author}/> 
+                    <About Title={blogData?.title} Author={blogData?.author} />
                 </div>
                 <div className='p-10'>
-                <PortableText value={blogData?.body} components={RichTextComponents}/>
+                    <PortableText value={blogData?.body} components={RichTextComponents} />
                 </div>
                 <Testimonials />
             </div>
-            
+
             <Footer />
         </>
     )

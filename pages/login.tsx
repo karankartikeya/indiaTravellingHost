@@ -2,11 +2,11 @@ import SignIn from '@/components/SignIn'
 import Head from 'next/head'
 import React from 'react'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
-import { createServerSupabaseClient} from '@supabase/auth-helpers-nextjs'
+import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs'
 
 type Props = {}
 
-function login({}: Props) {
+function login({ }: Props) {
   return (
     <div className=' h-screen'>
       <Head>
