@@ -33,7 +33,7 @@ function Header({ placeholder, session }: Props) {
 
   const header_content = {
     logo: {
-      title: "7svar",
+      title: "ITH",
       path: "/ith.jpeg",
     },
     menu: [
@@ -46,12 +46,12 @@ function Header({ placeholder, session }: Props) {
         link: "/#whyUs",
       },
       {
-        title: "How It Works",
-        link: "/#howItWorks",
+        title: "Itineraries",
+        link: "/#itineraries",
       },
       {
-        title: "Courses",
-        link: "/#courses",
+        title: "Blogs",
+        link: "/#blogs",
       },
     ],
   };
@@ -97,7 +97,7 @@ function Header({ placeholder, session }: Props) {
               {session ? (
                 <>
                   <button className=" rounded-lg border-2 bg-yellow-400 border-dark-gray text-xl font-bold px-8 py-4 transition hover:text-dark-blue hover:bg-blue-200" onClick={() => router.push('/profile/dashboard')}>
-                    My Learning
+                    Dashboard
                   </button>
                   <button className="rounded-lg border-2 bg-yellow-400 border-dark-blue text-xl font-bold px-8 py-4 transition hover:text-dark-blue hover:bg-blue-200 " onClick={signOut}>
                     Sign Out
@@ -105,7 +105,7 @@ function Header({ placeholder, session }: Props) {
                 </>
               ) : (
                 <>
-                  <Link href='/signin'>
+                  <Link href='/login'>
                     <button className="disabled font-extrabold rounded-lg bg-yellow-400 border-2 border-dark-gray text-xl text-gray-800 px-8 py-4 transition hover:text-dark-blue  hover:bg-blue-200">
                       Login
                     </button>

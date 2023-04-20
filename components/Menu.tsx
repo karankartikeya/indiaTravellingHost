@@ -28,12 +28,12 @@ export default function Menu({ menu, session }: Props) {
       link: "/#whyUs"
     },
     {
-      title: "How it Works?",
-      link: "/#howItWorks"
+      title: "Itineraries",
+      link: "/#itineraries"
     },
     {
-      title: "Courses",
-      link: "/#courses",
+      title: "Blogs",
+      link: "/#blogs",
     },
   ];
 
@@ -64,7 +64,7 @@ export default function Menu({ menu, session }: Props) {
                   className="active:text-blue-600 font-semibold text-gray-600 font-bold py-4 transition hover:text-blue-500 "
                   onClick={() => router.push("/profile/dashboard")}
                 >
-                  My Learning
+                  Dashboard
                 </li>
                 <li
                   className="active:text-blue-600 font-semibold text-xl text-gray-600 font-bold py-4 transition hover:text-blue-500 "
@@ -77,7 +77,7 @@ export default function Menu({ menu, session }: Props) {
               <>
                 <li
                   className="active:text-blue-600 font-extrabold text-gray-600 font-bold py-4 transition hover:text-blue-500 "
-                  onClick={() => router.push("/signin")}
+                  onClick={() => router.push("/login")}
                 >
                   Login
                 </li>
