@@ -31,7 +31,7 @@ function InfoCard({post, itinerary}: Props) {
                     <p className='flex items-center'> 4.7
                     </p>
                     <div>
-                    <Link href='https://be.aiosell.com/book/the-corbett-rajae-homestay'><p className=' bg-red-500 text-white font-bold border-2 rounded-full p-2 cursor-pointer'> Book Now!!</p></Link>
+                    <Link href='https://be.aiosell.com/book/the-corbett-rajae-homestay'><p className=' bg-red-500 text-white font-bold border-2 rounded-full p-2 cursor-pointer'>Read More</p></Link>
                     </div>
                 </div>
 
