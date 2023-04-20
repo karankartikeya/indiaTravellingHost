@@ -15,17 +15,20 @@ export default function Register({ }: Props) {
 		<div className=' h-screen'>
 			<Head>
 				<title>
-					SignUp: 7svar
+					Register: ITH
 				</title>
 				<meta
 					name="description"
-					content="An online music learning platform which solves 3I's. Enroll now and find the music within you.."
+					content="Register here to get started with your journey."
 					key="desc"
 				/>
-				<link rel="icon" href="7svar1.png" />
+				{/** add og title description and image */}
+				<meta property="og:title" content="SignIn: ITH" key="ogtitle" />
+				<meta property="og:description" content="Register here to get started with your journey." key="ogdesc" />
+				<meta property="og:image" content="" key="ogimage" />
+				<link rel="icon" href="ith.jpeg" />
 			</Head>
 			<Registration />
 		</div>
 	)
 }
-	

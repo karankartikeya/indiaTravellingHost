@@ -9,38 +9,27 @@ type Props = {
     itinerary?: Itinerary;
 }
 
-function InfoCard({ post, itinerary }: Props) {
-
-
-
+function SearchResult({ post, itinerary }: Props) {
     return (
         <div className='flex py-7 px-2 mb-10  border-b cursor-pointer hover:opacity-80 hover:shadow-lg rounded-xl pr-4 transition duration-200 ease-out first:border-t' >
             {post != null ? (
-                <>
-                    <div className='relative h-24 w-40 md:h-52 md:w-80 flex-shrink-0  '>
-                        <Image src={urlFor(post.bannerImage).url()} layout='fill' objectFit='cover' className='rounded-2xl' alt='pic of hotel 1' />
+                <div className='flex flex-col flex-grow pl-5 '>
+                    <div className='flex justify-between'>
+                        <p>Rajae HomeStay</p>
                     </div>
-                    <div className='flex flex-col flex-grow pl-5 '>
-                        <div className='flex justify-between'>
-                            <p>Rajae HomeStay</p>
+                    <h4 className='text-xl'>{post.title}</h4>
+                    <div className='border-b w-10 pt-2' />
+                    <p className='pt-2 text-sm text-gray-500 flex-grow'>{post.author}</p>
+                    <div className='flex justify-between items-end pt-5 '>
+                        <p className='flex items-center'> 4.7
+                        </p>
+                        <div>
+                            <Link href='https://be.aiosell.com/book/the-corbett-rajae-homestay'><p className=' bg-red-500 text-white font-bold border-2 rounded-full p-2 cursor-pointer'>Read More</p></Link>
                         </div>
-                        <h4 className='text-xl'>{post.title}</h4>
-                        <div className='border-b w-10 pt-2' />
-                        <p className='pt-2 text-sm text-gray-500 flex-grow'>{post.author}</p>
-                        <div className='flex justify-between items-end pt-5 '>
-                            <p className='flex items-center'> 4.7
-                            </p>
-                            <div>
-                                <Link href='https://be.aiosell.com/book/the-corbett-rajae-homestay'><p className=' bg-red-500 text-white font-bold border-2 rounded-full p-2 cursor-pointer'>Read More</p></Link>
-                            </div>
-                        </div>
-
                     </div>
-                </>
+                </div>
             ) : (
                 <>
-                    <div className='relative h-24 w-40 md:h-52 md:w-80 flex-shrink-0  '>
-                    </div>
                     <div className='flex flex-col flex-grow pl-5 '>
                         <div className='flex justify-between'>
                             <p>Rajae HomeStay</p>
@@ -63,4 +52,4 @@ function InfoCard({ post, itinerary }: Props) {
     )
 }
 
-export default InfoCard
+export default SearchResult

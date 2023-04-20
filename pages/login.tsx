@@ -2,23 +2,27 @@ import SignIn from '@/components/SignIn'
 import Head from 'next/head'
 import React from 'react'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
-import { createServerSupabaseClient} from '@supabase/auth-helpers-nextjs'
+import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs'
 
 type Props = {}
 
-function login({}: Props) {
+function login({ }: Props) {
   return (
     <div className=' h-screen'>
       <Head>
         <title>
-          SignIn: 7svar
+          SignIn: ITH
         </title>
         <meta
           name="description"
-          content="An online music learning platform which solves 3I's. Enroll now and find the music within you.."
+          content="SignIn here to get started with your journey."
           key="desc"
         />
-        <link rel="icon" href="7svar1.png" />
+        {/** add og title description and image */}
+        <meta property="og:title" content="SignIn: ITH" key="ogtitle" />
+        <meta property="og:description" content="SignIn here to get started with your journey." key="ogdesc" />
+        <meta property="og:image" content="" key="ogimage" />
+        <link rel="icon" href="ith.jpeg" />
       </Head>
       <SignIn />
     </div>

@@ -59,6 +59,7 @@ export interface Post extends sanityBody{
     bannerImage: Image;
     body: Block[];
     itineraries: Itinerary[];
+    keywords: string[];
 }
 
 export interface Itinerary extends sanityBody{

@@ -32,24 +32,26 @@ function Dashboard({ initialSession }: Props) {
         </title>
         <meta
           name="description"
-          content="An online music learning platform which solves 3I's. Enroll now and find the music within you.."
+          content=" India Travelling Host Dashboard"
           key="desc"
         />
-        <link rel="icon" href="7svar1.png" />
+        <link rel="icon" href="ith.jpeg" />
       </Head>
-      <Header session={isSession}/>
-      
-          <h1 className='uppercase text-4xl text-center font-bold mt-28 text-red-500'>Customer Dashboard</h1>
+      <meta property="og:title" content="Dashboard: ITH" key="ogtitle" />
+      <meta property="og:description" content="India Travelling Host is a unique and innovative solution that caters to the needs of foreign tourists visiting India." key="ogdesc" />
+      <link rel="icon" href="ith.jpeg" />
+      <Header session={isSession} />
 
-          <div className=' flex flex-col space-x-5 p-10 snap-x text-center'>
-            {subscription?.length != 0 ? (
-              <div className='grid md:grid-cols-2 xl:grid-cols-5 lg:grid-cols-3 grid-cols-1 gap-8 mb-16 p-10 w-fit'>
-                {subscription?.map((sub, index) => (<LearningCourseCard key={index} courseId={sub.itineraryId} subscription={sub} />))}
-              </div>
-            ) : (<div className=''><p className='md:text-6xl text-xl text-center items-center text-orange-500 justify-end font-semibold'>Seems like you haven&apos;t bought any course yet {userDetails?.full_name}</p>
-              <p className='text-gray-600 text-xl text-center mt-10'>Click <Link href='/#courses' className='underline text-red-500'>here</Link> to buy some for you</p></div>)}
+      <h1 className='uppercase text-4xl text-center font-bold mt-28 text-red-500'>Customer Dashboard</h1>
+
+      <div className=' flex flex-col space-x-5 p-10 snap-x text-center'>
+        {subscription?.length != 0 ? (
+          <div className='grid md:grid-cols-2 xl:grid-cols-5 lg:grid-cols-3 grid-cols-1 gap-8 mb-16 p-10 w-fit'>
+            {subscription?.map((sub, index) => (<LearningCourseCard key={index} courseId={sub.itineraryId} subscription={sub} />))}
           </div>
-        
+        ) : (<div className=''><p className='md:text-6xl text-xl text-center items-center text-orange-500 justify-end font-semibold'>Seems like you haven&apos;t bought any course yet {userDetails?.full_name}</p>
+          <p className='text-gray-600 text-xl text-center mt-10'>Click <Link href='/#courses' className='underline text-red-500'>here</Link> to buy some for you</p></div>)}
+      </div>
     </div>
   )
 }
