@@ -6,18 +6,20 @@ import { GetServerSideProps } from 'next'
 import Itinerary from '@/components/Itinerary'
 import Testimonials from '@/components/Testimonials'
 import React, { useState } from 'react'
-import { Post } from '@/typing'
+import { Post, Social } from '@/typing'
 import { fetchBlog } from '@/utils/fetchBlogs'
 import { useRouter } from 'next/router'
 import InfoCard from '@/components/InfoCard'
 import { useSupabaseClient } from '@supabase/auth-helpers-react'
 import Head from 'next/head'
+import { fetchSocials } from '@/utils/fetchSocials'
 
 type Props = {
     posts: Post[];
+    socials: Social[];
 }
 
-function AllBlog({ posts }: Props) {
+function AllBlog({ posts, socials }: Props) {
 
     const { query } = useRouter();
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
@@ -75,7 +77,7 @@ function AllBlog({ posts }: Props) {
                     ))}
                 </section>
             </main>
-            <Footer />
+            <Footer socials={socials}/>
         </div>
     )
 }
@@ -84,10 +86,12 @@ export default AllBlog
 
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
     const posts: Post[] = await fetchBlog();
+    const socials: Social[] = await fetchSocials();
 
     return {
         props: {
-            posts
+            posts,
+            socials
         }
     }
 }

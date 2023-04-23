@@ -6,12 +6,13 @@ import Sectionas from '@/components/Sectionas'
 import Footer from '@/components/Footer'
 import Testimonials from '@/components/Testimonials'
 import { fetchBlog } from '@/utils/fetchBlogs'
-import { Itinerary, Post } from '@/typing'
+import { Itinerary, Post, Social } from '@/typing'
 import { fetchItinerary } from '@/utils/fetchItineraries'
 import { useSupabaseClient } from '@supabase/auth-helpers-react'
 import { useState } from 'react'
 import Header from '../components/Head'
 import Head from 'next/head'
+import { fetchSocials } from '@/utils/fetchSocials'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -19,9 +20,10 @@ const inter = Inter({ subsets: ['latin'] })
 type Props = {
   posts: Post[];
   itineraries: Itinerary[];
+  socials: Social[];
 }
 
-export default function Home({ posts, itineraries }: Props) {
+export default function Home({ posts, itineraries, socials }: Props) {
   const supabaseClient = useSupabaseClient();
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
 
@@ -79,7 +81,7 @@ export default function Home({ posts, itineraries }: Props) {
 
         <Testimonials />
         <div className='mb-10'></div>
-        <Footer />
+        <Footer socials={socials}/>
       </div>
 
     </>
@@ -91,11 +93,13 @@ export default function Home({ posts, itineraries }: Props) {
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
   const posts: Post[] = await fetchBlog();
   const itineraries: Itinerary[] = await fetchItinerary();
+  const socials: Social[] = await fetchSocials();
 
   return {
     props: {
       posts,
-      itineraries
+      itineraries,
+      socials
     }
   }
 }
