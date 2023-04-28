@@ -10,9 +10,9 @@ import { Subscription, UserDetails } from '../typing';
 type UserContextType = {
   accessToken: string | null;
   user: User | null;
-  userDetails: UserDetails | null;
+  userDetails: { [x: string]: any } | null;
   isLoading: boolean;
-  subscription: Subscription[] | null;
+  subscription: { [x: string]: any } | null;
 };
 
 export const UserContext = createContext<UserContextType | undefined>(
@@ -33,8 +33,8 @@ export const MyUserContextProvider = (props: Props) => {
   const user = useSupaUser();
   const accessToken = session?.access_token ?? null;
   const [isLoadingData, setIsloadingData] = useState(false);
-  const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
-  const [subscription, setSubscription] = useState<Subscription[] | null>(null);
+  const [userDetails, setUserDetails] = useState<{ [x: string]: any } | null>(null);
+  const [subscription, setSubscription] = useState<{ [x: string]: any } | null>(null);
 
   const getUserDetails = () => supabase.from('users').select('*').single();
   const getSubscription = () => supabase
@@ -47,7 +47,7 @@ export const MyUserContextProvider = (props: Props) => {
       Promise.allSettled([getUserDetails(), getSubscription()]).then(
         (results) => {
           const userDetailsPromise = results[0];
-          const subscriptionPromise = results[1];
+          const subscriptionPromise = results[1]!;
 
           if (userDetailsPromise.status === 'fulfilled')
             setUserDetails(userDetailsPromise.value.data);

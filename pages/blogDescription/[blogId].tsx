@@ -66,7 +66,7 @@ function BlogId({ posts, socials }: Props) {
                 <section className="relative h-screen flex flex-col items-center justify-center text-center text-white py-0 px-3">
                     <Banner title={blogData?.title} />
                 </section>
-                <Header placeholder='Search' session={isUserLoggedIn} />
+                <Header placeholder='Search' session={isUserLoggedIn} post={posts}/>
                 <div className='bg-gradient-to-r from-[#cab59e] to-[#dcad51] scroll-smooth'>
                     <About Title={blogData?.title} Author={blogData?.author} />
                 </div>

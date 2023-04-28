@@ -3,6 +3,7 @@ import { Itinerary, Post } from '@/typing';
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 type Props = {
     post?: Post;
@@ -10,8 +11,12 @@ type Props = {
 }
 
 function SearchResult({ post, itinerary }: Props) {
+    const router = useRouter();
+    const redirect = () => {
+        router.push('/blogDescription/' + post?.postId)
+    }
     return (
-        <div className='flex py-7 px-2 mb-10  border-b cursor-pointer hover:opacity-80 hover:shadow-lg rounded-xl pr-4 transition duration-200 ease-out first:border-t' >
+        <div onClick={redirect} className='flex py-7 px-2 mb-10  border-b cursor-pointer hover:opacity-80 hover:shadow-lg rounded-xl pr-4 transition duration-200 ease-out first:border-t' >
             {post != null ? (
                 <div className='flex flex-col flex-grow pl-5 '>
                     <div className='flex justify-between'>
@@ -24,7 +29,7 @@ function SearchResult({ post, itinerary }: Props) {
                         <p className='flex items-center'> 4.7
                         </p>
                         <div>
-                            <Link href='https://be.aiosell.com/book/the-corbett-rajae-homestay'><p className=' bg-red-500 text-white font-bold border-2 rounded-full p-2 cursor-pointer'>Read More</p></Link>
+                            <button onClick={redirect}><p className=' bg-red-500 text-white font-bold border-2 rounded-full p-2 cursor-pointer'>Read More</p></button>
                         </div>
                     </div>
                 </div>

@@ -56,7 +56,7 @@ function AllBlog({ posts, socials }: Props) {
                 <meta property="og:image" content="" key="ogimage" />
                 <link rel="icon" href="ith.jpeg" />
             </Head>
-            <Header placeholder='Search here' session={isUserLoggedIn} />
+            <Header placeholder='Search here' session={isUserLoggedIn} post={posts}/>
             <main className='flex mb-10 mt-24'>
                 <section className='flex-grow pt-14 px-6'>
                     <p className='text-xs'>Travel with us </p>
