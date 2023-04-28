@@ -10,12 +10,16 @@ import Link from 'next/link'
 import LearningCourseCard from '../../components/LearningCoursecard'
 import LoadingDots from '../../components/LoadingDots/LoadingDots'
 import Header from '@/components/Head'
+import { fetchSocials } from '@/utils/fetchSocials'
+import { Social } from '@/typing'
+import Footer from '@/components/Footer'
 
 type Props = {
-  initialSession: Session
+  initialSession: Session,
+  socials: Social[],
 }
 
-function Dashboard({ initialSession }: Props) {
+function Dashboard({ initialSession, socials }: Props) {
 
   const { userDetails, isLoading, user, subscription } = useUser();
   const supabase = useSupabaseClient();
@@ -52,6 +56,7 @@ function Dashboard({ initialSession }: Props) {
         ) : (<div className=''><p className='md:text-6xl text-xl text-center items-center text-orange-500 justify-end font-semibold'>Seems like you haven&apos;t bought any course yet {userDetails?.full_name}</p>
           <p className='text-gray-600 text-xl text-center mt-10'>Click <Link href='/#courses' className='underline text-red-500'>here</Link> to buy some for you</p></div>)}
       </div>
+      <Footer socials={socials} />
     </div>
   )
 }
@@ -60,6 +65,7 @@ export default Dashboard
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   // Create authenticated Supabase Client
   const supabase = createServerSupabaseClient(ctx);
+  const socials: Social[] = await fetchSocials();
   // Check if we have a session
   const {
     data: { session }
@@ -76,7 +82,8 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   return {
     props: {
       initialSession: session,
-      user: session.user
+      user: session.user,
+      socials
     }
   };
 };

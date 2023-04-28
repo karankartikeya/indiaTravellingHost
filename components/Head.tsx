@@ -89,9 +89,8 @@ function Header({ placeholder, session, post }: Props) {
 
   return (
     <>
-
       <header className=" relative z-30 -top-10 lg:top-0 w-full py-6 h-[130px] shadow-red-500 z-20">
-        <nav className="mx-auto flex w-full flex-row items-center justify-center mt-0 space-x-4">
+        <nav className="mx-auto flex w-full flex-row items-center justify-between mt-0 space-x-4">
           {/* Logo */}
           <Image
             src={header_content?.logo?.path}
@@ -103,10 +102,9 @@ function Header({ placeholder, session, post }: Props) {
             alt={header_content?.logo?.title}
           />
 
-
           {/** Search Bar */}
-          <div className='md:flex flex-col w-[700px] items-center md:border-2 rounded-full py-2 shadow-md md:shadow-md'>
-            <input type='text' placeholder={placeholder} onChange={Search} onFocus={openModal} className='w-full md:w-[600px] bg-transparent py-2 px-4 rounded-full outline-none border-none' />
+          <div className='md:flex flex-col w-[300px] md:w-[400px] lg:w-full items-center md:border-2 rounded-full py-2 shadow-md md:shadow-md'>
+            <input type='text' placeholder={placeholder} onChange={Search} onFocus={openModal} className='w-[300px] md:w-[400px] lg:w-full bg-transparent py-2 px-4 rounded-full outline-none border-none' />
           </div>
 
 
@@ -128,7 +126,7 @@ function Header({ placeholder, session, post }: Props) {
               {session ? (
                 <>
                   <button className=" rounded-lg border-2 bg-yellow-400 border-dark-gray text-xl font-bold px-8 py-4 transition hover:text-dark-blue hover:bg-blue-200" onClick={() => router.push('/profile/dashboard')}>
-                    Dashboard
+                    My Learning
                   </button>
                   <button className="rounded-lg border-2 bg-yellow-400 border-dark-blue text-xl font-bold px-8 py-4 transition hover:text-dark-blue hover:bg-blue-200 " onClick={signOut}>
                     Sign Out
@@ -136,7 +134,7 @@ function Header({ placeholder, session, post }: Props) {
                 </>
               ) : (
                 <>
-                  <Link href='/login'>
+                  <Link href='/signin'>
                     <button className="disabled font-extrabold rounded-lg bg-yellow-400 border-2 border-dark-gray text-xl text-gray-800 px-8 py-4 transition hover:text-dark-blue  hover:bg-blue-200">
                       Login
                     </button>
@@ -184,8 +182,6 @@ function Header({ placeholder, session, post }: Props) {
               )}
             </div>
           </div>
-
-
         </nav>
         <Menu menu={menu} session={session} />
 
@@ -211,8 +207,11 @@ function Header({ placeholder, session, post }: Props) {
           </div>
         </motion.div>
       )}
+
     </>
-  );
+  )
+
+
 }
 
 export default Header

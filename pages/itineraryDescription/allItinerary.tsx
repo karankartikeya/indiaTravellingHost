@@ -1,19 +1,21 @@
 import Footer from '@/components/Footer'
 import { GetServerSideProps } from 'next'
 import React, { useState } from 'react'
-import { Itinerary, Post } from '@/typing'
+import { Itinerary, Post, Social } from '@/typing'
 import { useRouter } from 'next/router'
 import InfoCard from '@/components/InfoCard'
 import { fetchItinerary } from '@/utils/fetchItineraries'
 import { useSupabaseClient } from '@supabase/auth-helpers-react'
 import Header from '@/components/Head'
 import Head from 'next/head'
+import { fetchSocials } from '@/utils/fetchSocials'
 
 type Props = {
     itineraries: Itinerary[];
+    socials: Social[];
 }
 
-function AllItinerary({ itineraries }: Props) {
+function AllItinerary({ itineraries, socials }: Props) {
 
     const { query } = useRouter();
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
@@ -71,7 +73,7 @@ function AllItinerary({ itineraries }: Props) {
                     ))}
                 </section>
             </main>
-            <Footer />
+            <Footer socials={socials}/>
         </div>
     )
 }
@@ -80,10 +82,12 @@ export default AllItinerary
 
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
     const itineraries: Itinerary[] = await fetchItinerary();
+    const socials: Social[] = await fetchSocials();
 
     return {
         props: {
-            itineraries
+            itineraries,
+            socials
         }
     }
 }

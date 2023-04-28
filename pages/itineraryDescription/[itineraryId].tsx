@@ -3,7 +3,7 @@ import Banner from '@/components/Banner'
 import Footer from '@/components/Footer'
 import Itinerare from '@/components/Itinerary'
 import Testimonials from '@/components/Testimonials'
-import { Itinerary } from '@/typing'
+import { Itinerary, Social } from '@/typing'
 import { fetchItinerary } from '@/utils/fetchItineraries'
 import { GetServerSideProps } from 'next'
 import React, { useState } from 'react'
@@ -11,12 +11,14 @@ import Header from '@/components/Head'
 import { useRouter } from 'next/router'
 import { useSupabaseClient } from '@supabase/auth-helpers-react'
 import Head from 'next/head'
+import { fetchSocials } from '@/utils/fetchSocials'
 
 type Props = {
     itineraries: Itinerary[];
+    socials: Social[];
 }
 
-function ItineraryId({ itineraries }: Props) {
+function ItineraryId({ itineraries, socials }: Props) {
     const { query } = useRouter();
     const itineraryId = query.itineraryId as string;
     const blogData = itineraries.find((itinerary) => itinerary?.itineraryId === itineraryId)!;
@@ -66,7 +68,7 @@ function ItineraryId({ itineraries }: Props) {
                 <Itinerare plan={blogData?.body} />
 
             </div>
-            <Footer />
+            <Footer socials={socials}/>
         </>
     )
 }
@@ -75,9 +77,11 @@ export default ItineraryId
 
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
     const itineraries: Itinerary[] = await fetchItinerary();
+    const socials: Social[] = await fetchSocials();
     return {
         props: {
-            itineraries
+            itineraries,
+            socials
         }
     }
 }

@@ -6,7 +6,7 @@ import { GetServerSideProps } from 'next'
 import Itinerary from '@/components/Itinerary'
 import Testimonials from '@/components/Testimonials'
 import React, { useState } from 'react'
-import { Post } from '@/typing'
+import { Post, Social } from '@/typing'
 import { fetchBlog } from '@/utils/fetchBlogs'
 import { useRouter } from 'next/router'
 import { PortableText } from '@portabletext/react'
@@ -15,12 +15,14 @@ import { createServerSupabaseClient, Session } from '@supabase/auth-helpers-next
 import { GetServerSidePropsContext } from 'next'
 import { useSupabaseClient } from '@supabase/auth-helpers-react'
 import Head from 'next/head'
+import { fetchSocials } from '@/utils/fetchSocials'
 
 type Props = {
     posts: Post[];
+    socials: Social[];
 }
 
-function BlogId({ posts }: Props) {
+function BlogId({ posts, socials }: Props) {
 
     const { query } = useRouter();
     const blogId = query.blogId as string;
@@ -74,7 +76,7 @@ function BlogId({ posts }: Props) {
                 <Testimonials />
             </div>
 
-            <Footer />
+            <Footer socials={socials}/>
         </>
     )
 }
@@ -83,10 +85,12 @@ export default BlogId
 
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
     const posts: Post[] = await fetchBlog();
+    const socials: Social[] = await fetchSocials();
 
     return {
         props: {
-            posts
+            posts,
+            socials
         }
     }
 }

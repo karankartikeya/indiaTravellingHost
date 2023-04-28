@@ -28,6 +28,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-portable-text": "^0.6.0",
+    "react-social-icons": "^5.15.0",
     "react-toastify": "^9.1.2",
     "sanity": "^3.0.0",
     "sib-api-v3-typescript": "^2.2.2",
