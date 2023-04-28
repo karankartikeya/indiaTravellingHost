@@ -6,7 +6,7 @@ import supabase from '../utils/supabase'
 
 type Props = {
     courseId?: string,
-    subscription: Subscription,
+    subscription: {[x:string]:any},
 }
 
 export default function LearningCourseCard({ courseId, subscription }: Props) {
