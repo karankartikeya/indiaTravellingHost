@@ -90,7 +90,7 @@ function Header({ placeholder, session, post }: Props) {
   return (
     <>
       <header className=" relative z-30 -top-10 lg:top-0 w-full py-6 h-[130px] shadow-red-500 z-20">
-        <nav className="mx-auto flex max-w-7xl flex-row items-center justify-between mt-0 space-x-4">
+        <nav className="mx-auto flex w-full flex-row items-center justify-between mt-0 space-x-4">
           {/* Logo */}
           <Image
             src={header_content?.logo?.path}
@@ -103,8 +103,8 @@ function Header({ placeholder, session, post }: Props) {
           />
 
           {/** Search Bar */}
-          <div className='md:flex flex-col w-[300px] md:w-[400px] lg:w-full items-center md:border-2 rounded-full py-2 shadow-md md:shadow-md'>
-            <input type='text' placeholder={placeholder} onChange={Search} onFocus={openModal} className='w-[300px] md:w-[400px] lg:w-full bg-transparent py-2 px-4 rounded-full outline-none border-none' />
+          <div className='md:flex flex-col w-full md:w-[400px] lg:w-full items-center md:border-2 rounded-full py-2 shadow-md md:shadow-md'>
+            <input type='text' placeholder={placeholder} onChange={Search} onFocus={openModal} className='w-full md:w-[400px] lg:w-full bg-transparent py-2 px-4 rounded-full outline-none border-none' />
           </div>
 
 
