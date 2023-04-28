@@ -90,7 +90,7 @@ function Header({ placeholder, session, post }: Props) {
   return (
     <>
       <header className=" relative z-30 -top-10 lg:top-0 w-full py-6 h-[130px] shadow-red-500 z-20">
-        <nav className="mx-auto flex w-full flex-row items-center justify-between mt-0 space-x-4">
+        <nav className="mx-auto flex max-w-7xl flex-row items-center justify-between mt-0 space-x-4">
           {/* Logo */}
           <Image
             src={header_content?.logo?.path}
@@ -126,10 +126,10 @@ function Header({ placeholder, session, post }: Props) {
               {session ? (
                 <>
                   <button className=" rounded-lg border-2 bg-yellow-400 border-dark-gray text-xl font-bold px-8 py-4 transition hover:text-dark-blue hover:bg-blue-200" onClick={() => router.push('/profile/dashboard')}>
-                    My Learning
+                    Dashboard
                   </button>
                   <button className="rounded-lg border-2 bg-yellow-400 border-dark-blue text-xl font-bold px-8 py-4 transition hover:text-dark-blue hover:bg-blue-200 " onClick={signOut}>
-                    Sign Out
+                    SignOut
                   </button>
                 </>
               ) : (

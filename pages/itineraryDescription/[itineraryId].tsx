@@ -3,7 +3,7 @@ import Banner from '@/components/Banner'
 import Footer from '@/components/Footer'
 import Itinerare from '@/components/Itinerary'
 import Testimonials from '@/components/Testimonials'
-import { Itinerary, Social } from '@/typing'
+import { Itinerary, Post, Social } from '@/typing'
 import { fetchItinerary } from '@/utils/fetchItineraries'
 import { GetServerSideProps } from 'next'
 import React, { useState } from 'react'
@@ -12,13 +12,15 @@ import { useRouter } from 'next/router'
 import { useSupabaseClient } from '@supabase/auth-helpers-react'
 import Head from 'next/head'
 import { fetchSocials } from '@/utils/fetchSocials'
+import { fetchBlog } from '@/utils/fetchBlogs'
 
 type Props = {
     itineraries: Itinerary[];
     socials: Social[];
+    posts: Post[];
 }
 
-function ItineraryId({ itineraries, socials }: Props) {
+function ItineraryId({ itineraries, socials, posts }: Props) {
     const { query } = useRouter();
     const itineraryId = query.itineraryId as string;
     const blogData = itineraries.find((itinerary) => itinerary?.itineraryId === itineraryId)!;
@@ -59,7 +61,7 @@ function ItineraryId({ itineraries, socials }: Props) {
                 <section className="relative h-screen flex flex-col items-center justify-center text-center text-white py-0 px-3">
                     <Banner title={blogData?.title} />
                 </section>
-                <Header placeholder='Search' session={isUserLoggedIn} />
+                <Header placeholder='Search here' session={isUserLoggedIn} post={posts} />
                 <div className='bg-gradient-to-r from-[#cab59e] to-[#dcad51] scroll-smooth h-screen'>
                     <About />
                     <Testimonials />
@@ -78,10 +80,12 @@ export default ItineraryId
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
     const itineraries: Itinerary[] = await fetchItinerary();
     const socials: Social[] = await fetchSocials();
+    const posts: Post[] = await fetchBlog();
     return {
         props: {
             itineraries,
-            socials
+            socials,
+            posts
         }
     }
 }

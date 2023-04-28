@@ -5,7 +5,7 @@ import { createServerSupabaseClient, Session } from '@supabase/auth-helpers-next
 import { GetServerSidePropsContext } from 'next'
 
 import Head from 'next/head'
-import { useUser } from '../../utils/useUser'
+import { useUser } from '@/utils/useUser'
 import Link from 'next/link'
 import LearningCourseCard from '../../components/LearningCoursecard'
 import LoadingDots from '../../components/LoadingDots/LoadingDots'
@@ -13,6 +13,7 @@ import Header from '@/components/Head'
 import { fetchSocials } from '@/utils/fetchSocials'
 import { Social } from '@/typing'
 import Footer from '@/components/Footer'
+import { supabaseAdmin } from '@/utils/supabase-admin'
 
 type Props = {
   initialSession: Session,
@@ -46,17 +47,16 @@ function Dashboard({ initialSession, socials }: Props) {
       <link rel="icon" href="ith.jpeg" />
       <Header session={isSession} />
 
-      <h1 className='uppercase text-4xl text-center font-bold mt-28 text-red-500'>Customer Dashboard</h1>
+      <h1 className='uppercase text-4xl text-center font-bold mt-28 text-red-500'>Customer Dashboard:</h1>
 
       <div className=' flex flex-col space-x-5 p-10 snap-x text-center'>
         {subscription?.length != 0 ? (
           <div className='grid md:grid-cols-2 xl:grid-cols-5 lg:grid-cols-3 grid-cols-1 gap-8 mb-16 p-10 w-fit'>
             {subscription?.map((sub, index) => (<LearningCourseCard key={index} courseId={sub.itineraryId} subscription={sub} />))}
           </div>
-        ) : (<div className=''><p className='md:text-6xl text-xl text-center items-center text-orange-500 justify-end font-semibold'>Seems like you haven&apos;t bought any course yet {userDetails?.full_name}</p>
-          <p className='text-gray-600 text-xl text-center mt-10'>Click <Link href='/#courses' className='underline text-red-500'>here</Link> to buy some for you</p></div>)}
+        ) : (<div className=''><p className='md:text-6xl text-xl text-center items-center text-orange-500 justify-end font-semibold'>Seems like you haven&apos;t bought any itinerary yet {userDetails?.full_name}</p>
+          <p className='text-gray-600 text-xl text-center mt-10'>Click <Link href='/#itineraries' className='underline text-red-500'>here</Link> to buy some for you</p></div>)}
       </div>
-      <Footer socials={socials} />
     </div>
   )
 }

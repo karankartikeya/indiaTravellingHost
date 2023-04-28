@@ -51,6 +51,7 @@ export interface Subscription {
     subscription_createdtimestamp: text;
     current_subscription_starttimestamp: text;
     current_subscription_endtimestamp: text;
+    
 }
 
 export interface Post extends sanityBody {
