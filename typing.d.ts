@@ -1,11 +1,11 @@
-interface sanityBody{
+interface sanityBody {
     _createdAt: string;
     _id: string;
     _rev: string;
     _updatedAt: string;
 }
 
-interface Image{
+interface Image {
     _type: "image";
     asset: {
         _ref: string;
@@ -28,7 +28,7 @@ interface Span {
     text: string;
 }
 
-export interface Place extends sanityBody{
+export interface Place extends sanityBody {
     _type: "place";
     title: string;
     blogs: Post[];
@@ -49,9 +49,11 @@ export interface Subscription {
     status: string;
     itineraryId: string /* foreign key to courses.id */;
     subscription_createdtimestamp: text;
+    current_subscription_starttimestamp: text;
+    current_subscription_endtimestamp: text;
 }
 
-export interface Post extends sanityBody{
+export interface Post extends sanityBody {
     _type: "post";
     title: string;
     postId: string;
@@ -62,7 +64,7 @@ export interface Post extends sanityBody{
     keywords: string[];
 }
 
-export interface Itinerary extends sanityBody{
+export interface Itinerary extends sanityBody {
     _type: "itinerary";
     title: string;
     itineraryId: string;
@@ -70,19 +72,19 @@ export interface Itinerary extends sanityBody{
     blogs: Post[];
 }
 
-export interface Amenities extends sanityBody{
+export interface Amenities extends sanityBody {
     _type: "amenities";
     title: string;
     image: Image;
 }
 
-export interface Social extends sanityBody{
+export interface Social extends sanityBody {
     _type: "social";
     title: string;
     url: string;
 }
 
-export interface Sectionas extends sanityBody{
+export interface Sectionas extends sanityBody {
     _type: "sections";
     sectionName: string;
     sectionDescription: string;
