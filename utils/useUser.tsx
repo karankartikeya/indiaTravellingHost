@@ -12,7 +12,7 @@ type UserContextType = {
   user: User | null;
   userDetails: { [x: string]: any } | null;
   isLoading: boolean;
-  subscription: { [x: string]: any } | null;
+  subscription: { [x: string]: any }[] | null;
 };
 
 export const UserContext = createContext<UserContextType | undefined>(
@@ -34,7 +34,7 @@ export const MyUserContextProvider = (props: Props) => {
   const accessToken = session?.access_token ?? null;
   const [isLoadingData, setIsloadingData] = useState(false);
   const [userDetails, setUserDetails] = useState<{ [x: string]: any } | null>(null);
-  const [subscription, setSubscription] = useState<{ [x: string]: any } | null>(null);
+  const [subscription, setSubscription] = useState<{ [x: string]: any }[] | null>(null);
 
   const getUserDetails = () => supabase.from('users').select('*').single();
   const getSubscription = () => supabase
