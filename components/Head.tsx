@@ -134,7 +134,7 @@ function Header({ placeholder, session, post }: Props) {
                 </>
               ) : (
                 <>
-                  <Link href='/signin'>
+                  <Link href='/login'>
                     <button className="disabled font-extrabold rounded-lg bg-yellow-400 border-2 border-dark-gray text-xl text-gray-800 px-8 py-4 transition hover:text-dark-blue  hover:bg-blue-200">
                       Login
                     </button>
