@@ -1,6 +1,5 @@
 import { Itinerary, Post } from '@/typing';
-import Image from 'next/image'
-import { Router, useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import React from 'react'
 
 type Props = {
