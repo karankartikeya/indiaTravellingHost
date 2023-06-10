@@ -19,7 +19,7 @@ function DetailCard({ title, post, itinerary }: Props) {
     cursor-pointer transition-opacity duration-200'>
       <img
         className='w-32 h-32 rounded-full md:w-[200px] md:h-[200px]'
-        src='/logo.jpeg' />
+        src='/ith.jpeg' />
 
       <div className='px-0 md:px-10'>
         <h4 className='md:text-4xl text-xl font-bold'>{title == 'post' ? (post?.title) : (itinerary?.title)}</h4>

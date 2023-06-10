@@ -25,7 +25,7 @@ function Sectionas({num}: Props) {
             }}
             whileInView = {{opacity:1 ,x: 0}}
  
-            src='logo.jpeg'
+            src='ith.jpeg'
             className='mb-16 md:mb-0 flex-shrink-0 w-56 h-56 rounded-full object-cover md:rounded-lg md:w-64 md:h-95 xl:w-[400px] xl:h-[500px] '
             hidden={!hidden}
         />
