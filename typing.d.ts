@@ -59,6 +59,7 @@ export interface Post extends sanityBody {
     title: string;
     postId: string;
     author: string;
+    videoLink: string;
     bannerImage: Image;
     body: Block[];
     itineraries: Itinerary[];

@@ -21,6 +21,11 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'videoLink',
+      title: 'videoLink',
+      type: 'string',
+    }),
+    defineField({
       name: 'bannerImage',
       title: 'Banner Image',
       type: 'image',

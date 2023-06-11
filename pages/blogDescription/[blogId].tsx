@@ -68,7 +68,7 @@ function BlogId({ posts, socials }: Props) {
                 </section>
                 <Header placeholder='Search' session={isUserLoggedIn} post={posts}/>
                 <div className='bg-gradient-to-r from-[#cab59e] to-[#dcad51] scroll-smooth'>
-                    <About Title={blogData?.title} Author={blogData?.author} />
+                    <About Title={blogData?.title} Author={blogData?.author} videoLink={blogData.videoLink}/>
                 </div>
                 <div className='p-10'>
                     <PortableText value={blogData?.body} components={RichTextComponents} />

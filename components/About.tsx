@@ -3,11 +3,13 @@ import React from 'react'
 type Props = {
     Title?: string;
     Author?: string;
+    videoLink?: string;
 }
 
-function About({ Title, Author }: Props) {
+function About({ Title, Author, videoLink }: Props) {
+    
     return (
-
+        
         <section id='about'>
             <div className='layout flex flex-col items-center justify-center pt-24 pb-20 text-center'>
                 <h1 className='text-center font-sans text-4xl font-black leading-relaxed text-content md:text-5xl lg:text-8xl'>
@@ -19,7 +21,7 @@ function About({ Title, Author }: Props) {
                 <p className='h3 mt-4'>Written By: {Author} </p>
 
                 <iframe
-                    src='https://www.youtube.com/embed/d9AUCOtOaTM'
+                    src={videoLink}
                     title='YouTube video player'
                     allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
                     allowFullScreen
