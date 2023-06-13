@@ -19,8 +19,7 @@ function Sectionas({num, post}: Props) {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 1.5 }}
-            className='flex flex-col relative mt-24 text-center md:text-left md:flex-row max-wd-7xl px-10 justify-evenly mx-auto items-center scroll-auto mb-44'
-            onClick={goTo}>
+            className='flex space-y-4 flex-col relative mt-24 text-center md:text-left md:flex-row max-wd-7xl px-10 justify-evenly mx-auto items-center scroll-auto mb-44'>
             
             <motion.img
             initial= {{
@@ -37,11 +36,14 @@ function Sectionas({num, post}: Props) {
             className='mb-16 md:mb-0 flex-shrink-0 w-56 h-56 rounded-full object-cover md:rounded-lg md:w-64 md:h-95 xl:w-[400px] xl:h-[500px] '
             hidden={!hidden}
         />
-            <div className='space-y-10 px-0 md:px-10'>
+            <div className='space-y-4 px-0 md:px-10'>
                 <h3 className='text-4xl font-semibold'> {post?.title} </h3>
                 <p className='text-base'>
                  WRITTEN BY:   {post?.author}
                 </p>
+                <button className='bg-yellow-600 text-3xl p-2 rounded-lg' onClick={goTo}>
+                    Read More
+                </button>
             </div>
             <motion.img
             initial= {{
