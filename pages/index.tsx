@@ -70,9 +70,9 @@ export default function Home({ posts, itineraries, socials }: Props) {
 
         {/** Why us */}
         <section id='whyus' className=''>
-          <Sectionas num={1} />
-          <Sectionas num={2} />
-          <Sectionas num={3} />
+          <Sectionas num={1} post={posts[0]}/>
+          <Sectionas num={2} post={posts[1]}/>
+          <Sectionas num={3} post={posts[2]}/>
         </section>
 
         <section id='itineraries' className=''>
