@@ -39,7 +39,7 @@ function privacy({ socials }: Props) {
                             a. Non-Personal Information: We use non-personal information to analyze trends, administer the website, track user movements, and gather demographic information.
                         </li>
                         <li>
-                            b. Personal Information: We may use personal information to communicate with you, provide requested services, respond to inquiries, send newsletters, and improve our website's content and functionality.
+                            b. Personal Information: We may use personal information to communicate with you, provide requested services, respond to inquiries, send newsletters, and improve our website&apos;s content and functionality.
                         </li>
                     </div>
                 </div>
